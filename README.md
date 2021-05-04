@@ -14,6 +14,6 @@ The quotes speed increases are from runs with `n=1280`, 10 time steps and 16 thr
 |Name|Time/s|Increase|
 |:--- | ---: | :---:|
 |Python Serial| 13.1±0.2|1|
-|Python Parallel|2.58±0.07|5.07|
+|Python Parallel|2.33±0.08|5.62|
 |Julia Serial|0.67±0.1|19.6|
 |Julia Parallel|0.22±0.08|59.5|

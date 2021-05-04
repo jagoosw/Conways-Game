@@ -20,9 +20,9 @@ function check_cell(i,j,array)
     return live
 end
 
-n=128*10
+n=128*100
 lim=0.8
-t_end=10
+t_end=2
 
 array=rand(Float64, (n,n))
 

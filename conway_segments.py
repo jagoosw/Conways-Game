@@ -16,8 +16,8 @@ if num_cpu<1 or num_cpu%2!=0:
 if n%2!=0:
     raise RuntimeError('n must be even because I am lazy')
 
-if n%(num_cpu/2)!=0:
-    raise RuntimeError('n must be a muiltiple of num_cpu/2 because I am lazy')
+if n%(num_cpu**.5)!=0:
+    raise RuntimeError('n must be a muiltiple of num_cpu%.5 because I am lazy')
     
 def check_cell(i,j,array):
     neigs=sum(np.array([[1 if 0<=i+di<n and 0<=j+dj<n and (i+di,j+dj)!=(i,j) and array[i+di][j+dj]==True else 0 for di in [-1,0,1]] for dj in [-1,0,1]]).flatten())
@@ -55,13 +55,12 @@ if __name__=='__main__':
         result=[]
         i_range=range(0,n)
         j_range=range(0,n)
-        for i_sel in range(0,int(num_cpu/2)):
-            for j_sel in range(0,int(num_cpu/2)):
-                i_seg=i_range[int(i_sel*len(i_range)*2/num_cpu):int((i_sel+1)*len(i_range)*2/num_cpu)]
-                j_seg=j_range[int(j_sel*len(j_range)*2/num_cpu):int((j_sel+1)*len(j_range)*2/num_cpu)]
+        for i_sel in range(0,int(num_cpu**.5)):
+            for j_sel in range(0,int(num_cpu**.5)):
+                i_seg=i_range[int(i_sel*len(i_range)/(num_cpu**.5)):int((i_sel+1)*len(i_range)/(num_cpu**.5))]
+                j_seg=j_range[int(j_sel*len(j_range)/(num_cpu**.5)):int((j_sel+1)*len(j_range)/(num_cpu**.5))]
                 args={'i_range':i_seg,'j_range':j_seg,'array':array}
                 result.append(pool.map_async(check_segment,(args,)))
-
         result=[res.get()[0] for res in result]
         c=0
         array=[[0 for j in range(0,n)] for i in range(0,n)]
